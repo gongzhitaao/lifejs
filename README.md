@@ -45,7 +45,6 @@ See a live demo [here]();
     ```javascript
     var gol = life.wrapped();
     var next = gol.reset(pat, param);
-
     ```
 
 4. Get the next generation:

@@ -4,9 +4,6 @@ life.wrapped = function() {
 
   var alive_ = {};
   var ghost_ = {};
-  // var buff_ = [{alive: {}, ghost: {}},
-  //              {alive: {}, ghost: {}}];
-  // var curr_ = 0;
   var rule_ = {};
 
   var w_ = -1;
@@ -95,16 +92,6 @@ life.wrapped = function() {
 
       return ret;
     }
-  };
-
-  function clone(obj) {
-    var copy = {};
-    for (var i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        copy[i] = obj[i];
-      }
-    }
-    return copy;
   };
 
   function init() {
