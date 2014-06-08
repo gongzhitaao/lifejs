@@ -1,0 +1,19 @@
+body {
+    width: 960px;
+    margin: 2em auto auto;
+    font-family: 'Droid Serif', serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: steelblue;
+}
+
+h1,h2 {
+    margin: 1.5em 0;
+}
+
+code:not(.hljs) {
+    color: olive;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta name="charset" content="utf-8" />
+<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+<link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic"
+      rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/main.css">
+<body>
+<h1 id="game-of-life">Game of Life</h1>
+<p>Yet another <strong>WRAPPED</strong> implementation of game of live.</p>
+<h2 id="how-to-use">How to use</h2>
+<ol>
+<li><p>Define a <code>pattern</code> as:</p>
+<pre><code class="javascript">var pat = {
+  data: &quot;bo$2bo$3o!&quot;,
+  rule: &quot;23/3&quot;
+};
+</code></pre>
+<p>The <code>data</code> field is <em>Run Length Encoded</em> (RLE) (see
+<a href="http://www.conwaylife.com/wiki/.rle">lifewiki:rle</a>).  The <code>rule</code>
+field is the evolution rule, in the format of <code>S/B</code>, where <code>S</code>
+stands for <em>stays alive</em> and <code>B</code> for <em>born</em> (see
+<a href="http://www.conwaylife.com/wiki/Rules#Rules">lifewiki:rule</a>).  The
+above is a small glider using Conway&#39;s life rule.</p>
+</li>
+<li><p>Define a canvas size:</p>
+<pre><code class="javascript">var param = {
+  width: 32,
+  height: 16,
+  startx: 3,
+  starty: 3
+};
+</code></pre>
+<p>Since this is a wrapped implementation, i.e. the right-most column
+is adjancent to the left-most one, first row to the last row, we
+need to know the size (<code>width</code> and <code>height</code> field) of the entire
+canvas where the automata evolves.  And also the upper-left
+position to put the init pattern (<code>startx</code> and <code>starty</code> field).</p>
+</li>
+<li><p>Init the <code>life</code> as:</p>
+<pre><code class="javascript"> var gol = life.wrapped();
+ var next = gol.reset(pat, param);
+</code></pre>
+</li>
+<li><p>Get the next generation:</p>
+<pre><code class="javascript">next = gol.next();
+</code></pre>
+<p>The <code>next</code> is in the format:</p>
+<pre><code class="javascript">{
+  dead: [[x0, y0], [x1, y1], ...],
+  born: [[c0, r0], [c1, r1], ...]
+}
+</code></pre>
+<p>The <code>dead</code> array contains all the cells that are <em>DEAD</em> in this
+generation.  And the <code>born</code> array contains all the cells that are
+<em>BORN</em> in this generation;</p>
+</li>
+</ol>
+<h2 id="implementation">Implementation</h2>
+<p>This implementation used the concept of <strong>ghost cell</strong>, the cells that
+are 1) not live, 2) adjancent to a live cell.  Only the ghost cells
+might be borned the next generation.</p>
+<p>I maintain an array of live cells and an array of ghost cells for each
+generation.  With the help of ghost cells, I don&#39;t need to scan the
+whole canvas.</p>
+<a href="https://github.com/gongzhitaao/lifejs"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+<script src="js/life.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
