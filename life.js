@@ -70,8 +70,9 @@ life.wrapped = function() {
         if ("!" === c) {
           break;
         } else if ("$" === c) {
-          y += 1;
+          y += n > 0 ? n : 1;
           x = 0;
+          n = 0;
         } else if ("b" === c || "B" === c) {
           x += n > 0 ? n : 1;
           n = 0;
