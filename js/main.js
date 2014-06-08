@@ -3,7 +3,7 @@
   var Live = "#222";
   var Dead = "#eee";
   var MaxSize = 80;
-  var Edge = 10;
+  var Edge = 8;
 
   var pat = {
     data: "bo$2bo$3o!",
@@ -11,8 +11,8 @@
   };
 
   var param = {
-    width: 32,
-    height: 16,
+    width: 3 + 2 * Edge,
+    height: 3 + 2 * Edge,
     startx: Edge,
     starty: Edge
   };
