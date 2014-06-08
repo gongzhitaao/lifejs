@@ -5,7 +5,7 @@ Yet another **WRAPPED** implementation of game of live.
 
 ## How to use ##
 
-See a live demo [here]();
+See a live demo [here](http://gist.gongzhitaao.org/gist/?id=efb7b234c8366ed8857e);
 
 1. Define a `pattern` as:
 
