@@ -35,17 +35,21 @@ See a live demo [here](http://gist.gongzhitaao.org/gist/?id=efb7b234c8366ed8857e
    ```
 
    Since this is a wrapped implementation, i.e. the right-most column
-   is adjancent to the left-most one, first row to the last row, we
+   is adjacent to the left-most one, first row to the last row, we
    need to know the size (`width` and `height` field) of the entire
-   canvas where the automata evolves.  And also the upper-left
-   position to put the init pattern (`startx` and `starty` field).
+   canvas where the automaton evolves.  And also the upper-left
+   position to put the initial pattern (`startx` and `starty` field).
 
-3. Init the `life` as:
+3. Initialize the `life` as:
 
     ```javascript
     var gol = life.wrapped();
     var next = gol.reset(pat, param);
     ```
+
+    The `.reset` method returns the same structure as `.next` where
+    the `born` field contains all the living cells in the initial
+    pattern, see below.
 
 4. Get the next generation:
    ```javascript
@@ -64,11 +68,27 @@ See a live demo [here](http://gist.gongzhitaao.org/gist/?id=efb7b234c8366ed8857e
    generation.  And the `born` array contains all the cells that are
    *BORN* in this generation;
 
+## Life API Summary ##
+
+- life.**wrapped()**
+
+  Create a `life` object.
+
+- .**reset(pat, param)**
+
+  Set the initial pattern for evolution.  Returns the same structure
+  as `.next`.
+
+- .**next()**
+
+  Get the next generation.  See the above _How to use_ section for
+  more on the returned values.
+
 ## Implementation ##
 
 This implementation used the concept of **ghost cell**, the cells that
-are 1) not live, 2) adjancent to a live cell.  Only the ghost cells
-might be borned the next generation.
+are 1) not live, 2) adjacent to a live cell.  Only the ghost cells
+might be born the next generation.
 
 I maintain an array of live cells and an array of ghost cells for each
 generation.  With the help of ghost cells, I don't need to scan the
