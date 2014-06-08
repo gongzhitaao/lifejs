@@ -11,7 +11,7 @@
   };
 
   var param = {
-    width: 3 + 2 * Edge,
+    width: 20 + 2 * Edge,
     height: 3 + 2 * Edge,
     startx: Edge,
     starty: Edge
