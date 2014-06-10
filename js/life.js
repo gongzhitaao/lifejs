@@ -178,7 +178,7 @@ life.wrapped = function() {
     // process ghost cells
     for (k in ghost_) {
       n = ghost_[k];
-      if (3 === n) {
+      if (rule_.born(n)) {
         xy = key.decode(k);
         newborn.push(xy);
         alive_[k] = -1;
