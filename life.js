@@ -10,6 +10,7 @@ life.wrapped = function() {
   var h_ = -1;
   var x_ = -1;
   var y_ = -1;
+  var bbox_ = [-1, -1];
 
   function mod(m, n) {
     return ((m % n) + n) % n;
@@ -99,6 +100,7 @@ life.wrapped = function() {
     ghost_ = {};
 
     var i, j, r, c, k, n, t, xy;
+    var x0 = w_, y0 = h_, x1 = 0, y1 = 0;
     for (k in alive_) {
       xy = key.decode(k);
       n = -1;
@@ -111,11 +113,19 @@ life.wrapped = function() {
           else {
             if (!(t in ghost_)) ghost_[t] = 1;
             else ++ghost_[t];
+
+            if (c < x0) x0 = c;
+            if (c > x1) x1 = c;
+            if (r < y0) y0 = r;
+            if (r > y1) y1 = r;
           }
         }
         alive_[k] = n;
       }
     }
+
+    if (x1 - x0 + 1 > bbox_[0]) bbox_[0] = x1 - x0 + 1;
+    if (y1 - y0 + 1 > bbox_[1]) bbox_[1] = y1 - y0 + 1;
   }
 
   function ret() { };
@@ -168,7 +178,7 @@ life.wrapped = function() {
     // process ghost cells
     for (k in ghost_) {
       n = ghost_[k];
-      if (3 === n) {
+      if (rule_.born(n)) {
         xy = key.decode(k);
         newborn.push(xy);
         alive_[k] = -1;
@@ -181,6 +191,10 @@ life.wrapped = function() {
       dead: newdead,
       born: newborn
     };
+  };
+
+  ret.bbox = function() {
+    return bbox_;
   };
 
   return ret;
